@@ -13,9 +13,9 @@ class Variable:
     unit: str = field(repr=False, default="")
     header: str = field(init=False)
     data: list = field(init=False)
-    
+
     def __post_init__(self):
-        
+
         # checking for NOIR type
         if self.var_type not in ["N", "O", "I", "R"]:
             print("Incorrect variable type. Choose one of these: N, O, I, R.")
@@ -26,13 +26,13 @@ class Variable:
             self.header = f"{self.var_name} [{self.unit}]"
         else:
             self.header = self.var_name
-        
+
         # reading data from path
         self.data = read_data(self.input_path)
 
 
 def read_data(input_path: str):
-    
+
     # checking extensions
     filetype = input_path.split(".")[-1]
     if filetype == "xlsx" or filetype == "xls" or filetype == "ods":
@@ -57,16 +57,3 @@ def read_data(input_path: str):
             col.append(val)
 
     return col
-
-        
-def make_df(*var: object):
-    df = {}
-    for v in var:
-        if v.var_type == "N":
-            df[v.header] = R.StrVector(v.data)
-        elif v.var_type == "O" and type(v.data[0]) == str:
-            df[v.header] = R.StrVector(v.data)
-        else:
-            df[v.header] = R.FloatVector(v.data)
-    dataframe = R.DataFrame(df)
-    return dataframe
