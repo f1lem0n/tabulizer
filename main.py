@@ -70,5 +70,3 @@ def make_df(*var: object):
             df[v.header] = R.FloatVector(v.data)
     dataframe = R.DataFrame(df)
     return dataframe
-
-dataframe = make_d
