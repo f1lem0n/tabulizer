@@ -1,5 +1,4 @@
 from dataclasses import dataclass, field
-import sys
 
 import numpy as np
 import pandas as pd
@@ -9,7 +8,7 @@ import pandas as pd
 class Variable:
     input_path: str = field(repr=False)
     var_name: str = field(repr=False)
-    var_type: str = field(repr=False)
+    # var_type: str = field(repr=False)
     unit: str = field(repr=False, default="")
     header: str = field(init=False)
     data: list = field(init=False)
@@ -17,12 +16,12 @@ class Variable:
     def __post_init__(self):
 
         # checking for NOIR type
-        if self.var_type not in ["N", "O", "I", "R"]:
-            print("Incorrect variable type. Choose one of these: N, O, I, R.")
-            sys.exit()
+        # if self.var_type not in ["N", "O", "I", "R"]:
+            # print("Incorrect variable type. Choose one of these: N, O, I, R.")
 
         # construction of a header
-        if self.var_type in ["I", "R"] and self.unit != "":
+        # if self.var_type in ["I", "R"] and
+        if self.unit != "":
             self.header = f"{self.var_name} [{self.unit}]"
         else:
             self.header = self.var_name
