@@ -56,3 +56,18 @@ def read_data(input_path: str):
             col.append(val)
 
     return col
+
+
+var_list = [
+    Variable(
+        var_name = "absorbance",
+        unit = "RU",
+        input_path = "data/2021.12.13.xlsx"
+    ),
+    Variable(
+        var_name = "column",
+        input_path = "data/template1.ods"
+    )
+]
+
+quit
