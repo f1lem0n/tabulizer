@@ -1,4 +1,4 @@
-#!/home/f1lem0n/.config/anaconda3/envs/tab/bin/python3
+#!/bin/python3
 
 from dataclasses import dataclass, field
 
@@ -11,19 +11,13 @@ import argparse
 class Variable:
     input_path: str = field(repr=False)
     var_name: str = field(repr=False)
-    # var_type: str = field(repr=False)
     unit: str = field(repr=False, default="")
     header: str = field(init=False)
     data: list = field(init=False)
 
     def __post_init__(self):
 
-        # checking for NOIR type
-        # if self.var_type not in ["N", "O", "I", "R"]:
-            # print("Incorrect variable type. Choose one of these: N, O, I, R.")
-
-        # construction of a header
-        # if self.var_type in ["I", "R"] and
+        # make header
         if self.unit != "":
             self.header = f"{self.var_name}.{self.unit}"
         else:
@@ -34,7 +28,6 @@ class Variable:
 
 
 def read_data(input_path: str):
-
     # checking extensions
     filetype = input_path.split(".")[-1]
     if filetype == "xlsx" or filetype == "xls" or filetype == "ods":
@@ -62,7 +55,6 @@ def read_data(input_path: str):
 
 
 def make_table(var_list: list, output_path: str):
-
     columns = {}
     for var in var_list:
         columns[var.header] = var.data
@@ -71,10 +63,12 @@ def make_table(var_list: list, output_path: str):
 
 
 def run(args):
+    # assign args to variables
     input_paths = args.input
     output_path = args.output
     units = args.units
 
+    # make var_names
     if args.colnames:
         var_names = args.colnames
     else:
@@ -83,14 +77,17 @@ def run(args):
             name = i.split("/")[-1]
             var_names.append(name)
 
+    # suplement var_names if needed
     if len(input_paths) > len(var_names):
         var_names += input_paths[len(var_names):]
 
+    # make units
     if len(input_paths) > len(units):
         nempty = len(input_paths) - len(units)
         for i in range(nempty):
             units.append("")
 
+    # make list of Variable objects
     var_list = []
     for idx, _ in enumerate(input_paths):
         var = Variable(
@@ -104,6 +101,7 @@ def run(args):
 
 
 def main():
+    # argument parser
     parser = argparse.ArgumentParser(
         description = "Convert a list of csv or excel files containing matrices to a csv table."
     )
