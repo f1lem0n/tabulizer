@@ -1,4 +1,4 @@
-#!/home/f1lem0n/.config/anaconda3/envs/tab/bin/python3
+#!/bin/python3
 
 from dataclasses import dataclass, field
 
