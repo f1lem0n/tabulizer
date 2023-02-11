@@ -9,6 +9,9 @@ import pandas as pd
 
 @dataclass
 class Variable:
+    """
+    TODO
+    """
     input_path: str = field(repr=False)
     var_name: str = field(repr=False)
     data: list = field(init=False)
@@ -19,6 +22,9 @@ class Variable:
 
 
 def read_data(input_path: str) -> list:
+    """
+    TODO
+    """
     # checking extensions
     filetype = input_path.split(".")[-1]
     if filetype == "xlsx" or filetype == "xls" or filetype == "ods":
@@ -46,6 +52,7 @@ def read_data(input_path: str) -> list:
 def make_table(var_list: list, output_path: str):
     """
     Makes csv table from list of variables and var names.
+    TODO
     """
     columns = {}
     for var in var_list:
@@ -57,6 +64,7 @@ def make_table(var_list: list, output_path: str):
 def run(args):
     """
     Runs the whole program.
+    TODO
     """
     # assign args to variables
     input_paths = args.input
