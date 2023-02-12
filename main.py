@@ -89,7 +89,9 @@ def run(args):
 
     # suplement var_names if needed
     if len(input_paths) > len(var_names):
-        var_names += input_paths[len(var_names):]
+        for i in input_paths[len(var_names):]:
+            name = i.split("/")[-1].split(".")[0]
+            var_names.append(name)
 
     # make list of Variable objects
     var_list = []
@@ -133,7 +135,6 @@ def main():
     parser.set_defaults(func=run)
     args = parser.parse_args()
     args.func(args)
-    print(args)
 
 
 if __name__ == "__main__":
