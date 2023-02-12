@@ -2,7 +2,7 @@ import os
 
 import tabulizer.main as main
 
-output = "sample_output/table.csv"
+output = "sample_output/test_make_table.csv"
 input = "sample_data/random2.csv"
 
 
@@ -13,7 +13,8 @@ class TestMakeTable():
         if file_exists:
             os.remove(output)
         var_list = [main.Variable(input_path=input,
-                                  var_name="SpanishInquisition")]
+                                  col_name="SpanishInquisition",
+                                  size=None)]
         main.make_table(var_list, output)
         file_exists = os.path.exists(output)
         assert file_exists
