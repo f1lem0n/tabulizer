@@ -19,6 +19,8 @@ class Variable:
     will become a column, column name, and size of an
     array to be read.
 
+    ---
+
     Parameters:
 
     input_path: Path to file containing matrix-like data.
@@ -115,7 +117,7 @@ def resize(array, size):
 
 def make_col(array) -> list:
     """
-    Transforms an array into column (list).
+    Transforms data array into list.
     """
     # array to list
     col = []
@@ -133,7 +135,7 @@ def make_table(var_list: list, output_path: str):
     columns = {}
     for var in var_list:
         columns[var.col_name] = var.data
-    table = pd.DataFrame(columns)
+    table = pd.DataFrame(columns).astype(str)
     table.to_csv(output_path, index=False)
 
 
@@ -173,6 +175,9 @@ def run(args):
 
 
 def argument_parser(args):
+    """
+    CLI argument parser.
+    """
     parser = argparse.ArgumentParser(
         description="""Convert a list of csv or excel files
         containing matrices to a csv table."""
