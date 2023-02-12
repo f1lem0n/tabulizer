@@ -34,7 +34,15 @@ def read_data(input_path: str) -> list:
     elif filetype == "tsv":
         df = pd.read_csv(input_path, sep="\t", header=None)
     else:
-        raise TypeError("Unsupported file type.")
+        raise TypeError(f"""
+                        Format is {filetype} not supported
+                        You may want to use:
+                        csv
+                        tsv
+                        xlsx
+                        xls
+                        ods
+                        """)
 
     # trimming the array
     array = np.asarray(df)
@@ -125,6 +133,7 @@ def main():
     parser.set_defaults(func=run)
     args = parser.parse_args()
     args.func(args)
+    print(args)
 
 
 if __name__ == "__main__":
